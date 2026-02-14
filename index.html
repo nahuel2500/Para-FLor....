@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Flor 💖</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at bottom, #1b0033, #000000);
+  color: white;
+  text-align: center;
+}
+
+/* ESTRELLAS */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity: 0.2;}
+  to {opacity: 1;}
+}
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+  position: relative;
+  top: 20vh;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yes {
+  background: #ff4da6;
+  color: white;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: #555;
+  color: white;
+  position: relative;
+}
+
+/* CARTA */
+.letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: white;
+  color: black;
+  width: 85%;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 15px;
+  transition: 0.5s;
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
+}
+
+.letter.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* CORAZONES */
+.heart {
+  position: absolute;
+  color: #ff4da6;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  h1 { font-size: 1.6rem; }
+  button { font-size: 0.9rem; }
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <!-- CAMBIÁ ESTE LINK POR TU CANCION -->
+  <source src="" type="audio/mp3">
+</audio>
+
+<div class="container">
+  <h1>Flor 💖</h1>
+  <p>¿Querés ser mi San Valentín?</p>
+  <button id="yes" onclick="showLetter()">Sí 💘</button>
+  <button id="no" onmouseover="moveButton()">No 😢</button>
+</div>
+
+<div class="letter" id="letter">
+  <h2>Para vos 💌</h2>
+  <p>
+    Desde que llegaste a mi vida todo es más lindo.  
+    Sos mi persona favorita, mi sonrisa diaria,  
+    y la razón por la que creo en el amor.  
+  </p>
+  <p><strong>Te quiero muchísimo 💖</strong></p>
+</div>
+
+<script>
+
+/* BOTÓN QUE SE ESCAPA */
+function moveButton() {
+  const button = document.getElementById("no");
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  button.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+/* MOSTRAR CARTA */
+function showLetter() {
+  document.getElementById("letter").classList.add("show");
+}
+
+/* CREAR ESTRELLAS */
+for(let i = 0; i < 80; i++){
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.width = star.style.height = Math.random() * 3 + "px";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(star);
+}
+
+/* CORAZONES FLOTANDO */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 15 + 15 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 800);
+
+</script>
+
+</body>
+</html>
